@@ -1,0 +1,13 @@
+{
+  "name": "Morning Brief",
+  "short_name": "Morning Brief",
+  "description": "国内経済と山口県のニュースを毎朝3分で聞く無料ブリーフ",
+  "lang": "ja",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f6f5f1",
+  "theme_color": "#112a46",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

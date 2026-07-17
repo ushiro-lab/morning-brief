@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#112a46" />
+    <meta name="description" content="国内経済と山口県のニュースを毎朝3分で聞く無料ブリーフ" />
+    <title>Morning Brief | 朝3分のニュース</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#"><span class="brand-mark">M</span><span>Morning Brief</span></a>
+        <div class="date">毎朝 7:00</div>
+        <button class="avatar" aria-label="プロフィール">Y</button>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">GOOD MORNING, YOSHIMURA</p>
+          <h1>今朝のニュースを、<br /><em>3分</em>で。</h1>
+          <p class="lead">大切なことだけを、あなたの朝に合う順番で。</p>
+        </div>
+        <div class="morning-card">
+          <span>今日のブリーフ</span><strong id="storyCount">4</strong><small>STORIES SELECTED</small>
+        </div>
+      </section>
+
+      <section class="player-card" aria-label="今日の音声ブリーフ">
+        <div class="player-icon">▶</div>
+        <div class="player-copy"><p>7月17日 朝のブリーフ</p><span id="playerStatus">再生するには「ブリーフを作成」を押してください</span></div>
+        <div class="player-time"><span id="elapsed">0:00</span><div class="progress"><i id="progressBar"></i></div><span id="duration">3:00</span></div>
+        <button id="playButton" class="play-button" disabled>再生</button>
+      </section>
+
+      <div class="workspace">
+        <section class="news-section">
+          <div class="section-heading"><div><p class="eyebrow">CURATED FOR YOU</p><h2>今朝のニュース</h2></div><button id="selectAll" class="text-button">すべて選択</button></div>
+          <div class="source-actions"><a class="smartnews-link" href="https://www.smartnews.com/" target="_blank" rel="noopener noreferrer">SmartNews を開く ↗</a><button id="showPaste" class="text-button">見出しを貼り付ける</button></div>
+          <form id="pasteForm" class="paste-form" hidden>
+            <textarea id="headlinePaste" rows="4" placeholder="SmartNewsで選んだ見出しを1行ずつ貼り付けます&#10;例：県内企業の設備投資が拡大"></textarea>
+            <button type="submit">5本まで追加</button>
+          </form>
+          <form id="rssForm" class="rss-form">
+            <input id="rssUrl" type="url" aria-label="RSSフィードのURL" value="https://www.pref.yamaguchi.lg.jp/rss/10/list10.xml" />
+            <button type="submit">山口県RSSを読む</button>
+          </form>
+          <p class="rss-note">SmartNewsで国内経済・山口県の見出しを確認し、気になる5本を貼り付けます。山口県公式RSSも利用できます。記事と履歴はこの端末内だけに保存されます。</p>
+          <div id="newsList" class="news-list"></div>
+          <button id="createBrief" class="create-button">選んだニュースからブリーフを作成 <span>→</span></button>
+        </section>
+
+        <aside class="settings-panel">
+          <p class="eyebrow">YOUR ROUTINE</p><h2>配信の設定</h2>
+          <label class="field-label" for="deliveryTime">毎朝の配信時刻</label>
+          <input id="deliveryTime" type="time" value="07:00" />
+          <label class="field-label" for="voice">声の雰囲気</label>
+          <select id="voice"><option>落ち着いた解説</option><option>親しみやすい案内役</option><option>テンポのよいキャスター</option></select>
+          <label class="switch-row"><span><b>自動で生成する</b><small>選んだカテゴリから毎朝作成</small></span><input id="autoCreate" type="checkbox" checked /><i></i></label>
+          <div class="categories"><p class="field-label">優先するカテゴリ</p><div id="categoryButtons"></div></div>
+          <p class="hint">設定：国内経済・山口県内ニュースを優先し、毎朝7:00に確認します。無料RSS・ブラウザ内蔵の音声読み上げ・この端末内の保存だけを使用します。</p>
+        </aside>
+      </div>
+    </main>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) navigator.serviceWorker.register("./service-worker.js");
+    </script>
+  </body>
+</html>
